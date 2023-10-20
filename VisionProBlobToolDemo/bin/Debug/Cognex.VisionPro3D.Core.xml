@@ -2614,16 +2614,11 @@ The x component of this point's 3D position.
         </member>
         <member name="P:Cognex.VisionPro3D.Cog3DPoint.ShapeState">
             <summary>
-Gets or sets the ShapeState for this shape.
+Gets the ShapeState for this shape.
 </summary>
             <value>
-The ShapeState of this Shape.  The default and only legal value
-is Cog3DShapeStateConstants.Vertex.
+The ShapeState of this Shape.
 </value>
-            <exception cref="T:System.ArgumentException">
-The ShapeState for this shape may only be
-Cog3DShapeStateConstants.Vertex.
-</exception>
         </member>
         <member name="M:Cognex.VisionPro3D.Cog3DPoint.ComputeDistanceVertex(Cognex.VisionPro3D.Cog3DVect3)">
             <inheritdoc />
@@ -4866,7 +4861,7 @@ Copy constructor.
             <exception cref="T:System.ArgumentNullException">
 If other is null.
 </exception>
-            <exception cref="T:System.ObjectDisposedException">
+            <exception cref="!:ObjectDisposedExceptio">
 If other is disposed.
 </exception>
         </member>
@@ -5614,15 +5609,8 @@ and more than one instance of it exists in this tree. </para>
             <event cref="!:E:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.TreeAdded">
 Fires when a tree is added to this tree. </event>
         </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.AddSpaceWithID(System.String,System.String,Cognex.VisionPro3D.ICog3DTransform,System.Byte[])">
-            <summary>
-For Cognex internal use only.
-</summary>
-        </member>
         <member name="M:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.AddSpaceWithID(System.String,System.String,Cognex.VisionPro3D.ICog3DTransform,System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-For Cognex internal use only.
-</summary>
+            <summary> For Cognex internal use only. </summary>
         </member>
         <member name="M:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.AddSpace(System.String,System.String,Cognex.VisionPro3D.ICog3DTransform,Cognex.VisionPro.CogAddSpaceConstants)">
             <summary> Add a new coordinate space, with the given name and
@@ -6147,37 +6135,17 @@ space name</see> for the root space. </para>
             <event cref="!:E:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.NameChanged">
 Fires when the root name changes. </event>
         </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.GetInternal">
-            <summary>
-For Cognex internal use only.
-</summary>
-            <returns>
-The internal state of this Cog3DCoordinateSpaceTree.
-</returns>
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.#ctor(System.IntPtr)">
-            <summary>
-For Cognex internal use only.
-</summary>
-            <param name="arg">
-The internal state of this newly constructed
-Cog3DCoordinateSpaceTree.
-</param>
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.Finalize">
-            <summary>
-Finalize this Cog3DCoordinateSpaceTree.
-This releases any unmanaged resources.
-This may be called more than once.
-</summary>
-        </member>
         <member name="M:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.Dispose">
-            <summary>
-Destruct this Cog3DCoordinateSpaceTree.
-This releases any managed resources and then
-calls the finalizer. This method may be called
-more than once.
-</summary>
+            <summary> Releases all resources used by this class instance. </summary>
+            <remarks>
+                <para> This method deterministically unhooks events
+from any embedded trees that might live within this one and then
+releases all resources used by this tree.  It can be useful in
+situations where you are finished with a coordinate space tree,
+but are still using one of the trees embedded within it. </para>
+                <para> Do not attempt to access the tree after calling this
+method.  </para>
+            </remarks>
         </member>
         <member name="M:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.#ctor(Cognex.VisionPro3D.Cog3DCoordinateSpaceTree)">
             <summary> Constructs a new instance of this class as a deep copy
@@ -6193,7 +6161,7 @@ Populates the provided SerializationInfo with the data needed to
 serialize the object.
 </summary>
             <param name="info">The SerializationInfo to populate with data.</param>
-            <param name="ctxt">The destination for this serialization.</param>
+            <param name="context">The destination for this serialization.</param>
         </member>
         <member name="M:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
@@ -6202,21 +6170,12 @@ Constructs a new instance of this object from saved data.
             <param name="info">
 The SerializationInfo that holds the saved object data.
 </param>
-            <param name="ctxt">
+            <param name="context">
 The standard StreamingContext argument.
 </param>
         </member>
-        <member name="E:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.SubtreeMoved">
-            <summary> Occurs after a subtree is moved within this tree. </summary>
-        </member>
-        <member name="E:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.SubtreeDeleted">
-            <summary> Occurs after a subtree is deleted from this tree. </summary>
-        </member>
         <member name="E:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.TreeAdded">
             <summary> Occurs after a new tree is added to this tree. </summary>
-        </member>
-        <member name="E:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.SpaceAdded">
-            <summary> Occurs after a new space is added to this tree. </summary>
         </member>
         <member name="E:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.TransformChanged">
             <summary> Occurs after a transform is changed in this tree.  Note
@@ -6227,6 +6186,15 @@ in a variety of ways. For example: (1) by a call to the
 method, or (2) by a call to the
 <see cref="!:M:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.AddSpace(System.String,System.String,Cognex.VisionPro3D.ICog3DTransform,Cognex.VisionPro.CogAddSpaceConstants)" />
 method that replaces an existing transform. </summary>
+        </member>
+        <member name="E:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.SubtreeMoved">
+            <summary> Occurs after a subtree is moved within this tree. </summary>
+        </member>
+        <member name="E:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.SubtreeDeleted">
+            <summary> Occurs after a subtree is deleted from this tree. </summary>
+        </member>
+        <member name="E:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.SpaceAdded">
+            <summary> Occurs after a new space is added to this tree. </summary>
         </member>
         <member name="E:Cognex.VisionPro3D.Cog3DCoordinateSpaceTree.NameChanged">
             <summary> Occurs after a space name is changed in this tree. </summary>
@@ -6268,48 +6236,6 @@ value. If a partially-qualified (PQ) name is returned, it begins
 with either "." or "..", and specifies a space relative to the
 first space name argument of the method. </para>
             </remarks>
-        </member>
-        <member name="P:Cognex.VisionPro3D.Cog3DTreeLookupEventArgs.Response">
-            <summary>
-Whether the current Tree property represents
-an actual response from the top-most tree,
- that is, from the tree that has no parent.
-</summary>
-        </member>
-        <member name="P:Cognex.VisionPro3D.Cog3DTreeLookupEventArgs.Tree">
-            <summary>
-The tree of interest.
-</summary>
-        </member>
-        <member name="P:Cognex.VisionPro3D.Cog3DTreeLookupEventArgs.ID">
-            <summary>
-The unique identifier associated with the tree of interest.
-</summary>
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DTreeLookupEventArgs.#ctor">
-            <summary>
-Construct a new instance of this class.
-</summary>
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DTreeLookupEventArgs.#ctor(System.Int64,Cognex.VisionPro3D.Cog3DCoordinateSpaceTree,System.Boolean)">
-            <summary>
-Construct a new instance of this class.
-</summary>
-            <param name="id">
-The unique ID associated with the tree of interest.
-</param>
-            <param name="tree">
-The tree of interest.
-</param>
-            <param name="response">
-True if the contents of this object represent
-an actual response, false otherwise.
-</param>
-        </member>
-        <member name="T:Cognex.VisionPro3D.Cog3DTreeLookupEventArgs">
-            <summary>
-For Cognex internal use only.
-</summary>
         </member>
         <member name="M:Cognex.VisionPro3D.Cog3DTransformComposed.Canonize(System.Boolean)">
             <summary>
@@ -7257,7 +7183,7 @@ Therefore, it might be of type Cog3DTransformComposed or a simpler type.
 An ICog3DTransform that represents the result of the composition.
 </returns>
             <remarks>
-The returned transform type depends on the type of this transform and the type of <paramref name="rhs" />, for example :
+The returned transform type depends on the type of this transform and the type of <param name="rhs" />, for example :
 <list type="bullet"><item>  Cog3DTransformRotation, Cog3DTransformRotation  returns  Cog3DTransformRotation </item><item>  Cog3DTransformRigid,    Cog3DTransformRigid     returns  Cog3DTransformRigid </item><item>  Cog3DTransformLinear,   Cog3DTransformLinear    returns  Cog3DTransformLinear </item><item>  Cog3DTransformRigid,    Cog3DTransformRotation  returns  Cog3DTransformRigid </item><item>  Cog3DTransformLinear,   Cog3DTransformRotation  returns  Cog3DTransformLinear </item><item>  Cog3DTransformRotation, Cog3DTransformRigid     returns  Cog3DTransformRigid </item><item>  Cog3DTransformRotation, Cog3DTransformLinear    returns  Cog3DTransformLinear </item><item>  Cog3DTransformRigid,    Cog3DTransformLinear    returns  Cog3DTransformLinear </item><item>  Cog3DTransformLinear,   Cog3DTransformRigid     returns  Cog3DTransformLinear </item></list></remarks>
         </member>
         <member name="M:Cognex.VisionPro3D.ICog3DTransform.CopyBase">
@@ -7664,25 +7590,6 @@ The value of the element at the given row and column.
             <exception cref="T:System.ArgumentException">
 If <paramref name="rowIndex" /> or <paramref name="colIndex" /> is not inside range [0,2].
 </exception>
-        </member>
-        <member name="P:Cognex.VisionPro3D.Cog3DMatrix3x3.IsRotation">
-            <summary>
-Gets whether this matrix is a pure rotation.
-</summary>
-            <value>
-True if this matrix represents a pure rotation; false otherwise.
-</value>
-            <remarks>
-A matrix is a pure rotation if:
-<list type="bullet"><item>
-The matrix has a determinant of 1, and
-</item><item>
-The matrix composed with its transpose yields the identity matrix.
-(i.e.  matrix * matrix.Transpose() = I)
-</item></list>
-A pure rotation matrix has unity scale in every direction, and
-contains no skew.
-</remarks>
         </member>
         <member name="P:Cognex.VisionPro3D.Cog3DMatrix3x3.IsIdentity">
             <summary>
@@ -8588,7 +8495,7 @@ The zero based index of the first matching element. If no match
 is found this will be -1.
 </returns>
         </member>
-        <member name="P:Cognex.VisionPro3D.Cog3DVect3Collection.default(System.Int32)">
+        <member name="P:Cognex.VisionPro3D.Cog3DVect3Collection.Item(System.Int32)">
             <summary>
 Gets or sets the item at the specified index.
 </summary>
@@ -8801,7 +8708,7 @@ Gets a value that indicates if this collection is fixed size.
 True if this collection is fixed size; otherwise false.
 </value>
         </member>
-        <member name="P:Cognex.VisionPro3D.Cog3DScalarCollection.default(System.Int32)">
+        <member name="P:Cognex.VisionPro3D.Cog3DScalarCollection.Item(System.Int32)">
             <summary>
 Gets or sets the item at the specified index.
 </summary>
@@ -9016,7 +8923,7 @@ The zero based index of the first matching element. If no match
 is found this will be -1.
 </returns>
         </member>
-        <member name="P:Cognex.VisionPro3D.Cog3DVect2Collection.default(System.Int32)">
+        <member name="P:Cognex.VisionPro3D.Cog3DVect2Collection.Item(System.Int32)">
             <summary>
 Gets or sets the item at the specified index.
 </summary>
@@ -9307,184 +9214,6 @@ State flag for the Item (indexer) property.
             <summary>
 This class defines the changed events common to VPro 3D collection classes.
 </summary>
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DVect3F.RealEqual(Cognex.VisionPro3D.Cog3DVect3F,Cognex.VisionPro3D.Cog3DVect3F,System.Double)">
-            <inheritdoc cref="M:Cognex.VisionPro3D.ICog3DBase.RealEqual(System.Object,System.Object,System.Double)" />
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DVect3F.op_Inequality(Cognex.VisionPro3D.Cog3DVect3F,Cognex.VisionPro3D.Cog3DVect3F)">
-            <summary>
-Compare two Cog3DVect3F.
-</summary>
-            <param name="alpha">
-The first vector.
-</param>
-            <param name="beta">
-The second vector.
-</param>
-            <returns>
-False if exactly equal, true otherwise.
-</returns>
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DVect3F.op_Equality(Cognex.VisionPro3D.Cog3DVect3F,Cognex.VisionPro3D.Cog3DVect3F)">
-            <summary>
-Compare two Cog3DVect3F.
-</summary>
-            <param name="alpha">
-The first vector.
-</param>
-            <param name="beta">
-The second vector.
-</param>
-            <returns>
-True if exactly equal, false otherwise.
-</returns>
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DVect3F.op_Division(Cognex.VisionPro3D.Cog3DVect3F,System.Single)">
-            <summary>
-Divide a Cog3DVect3F by a scalar.
-</summary>
-            <param name="vect">
-The vector.
-</param>
-            <param name="denom">
-The scalar divisor.
-</param>
-            <returns>
-The divided (scaled) vector.
-</returns>
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DVect3F.op_Multiply(Cognex.VisionPro3D.Cog3DVect3F,System.Single)">
-            <summary>
-Multiply a Cog3DVect3F by a scalar.
-</summary>
-            <param name="vect">
-The vector.
-</param>
-            <param name="mult">
-The scalar multiplier.
-</param>
-            <returns>
-The multiplied (scaled) vector.
-</returns>
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DVect3F.op_Subtraction(Cognex.VisionPro3D.Cog3DVect3F,Cognex.VisionPro3D.Cog3DVect3F)">
-            <summary>
-Subtract two Cog3DVect3F.
-</summary>
-            <param name="alpha">
-The first vector.
-</param>
-            <param name="beta">
-The second vector.
-</param>
-            <returns>
-The vector difference.
-</returns>
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DVect3F.op_Addition(Cognex.VisionPro3D.Cog3DVect3F,Cognex.VisionPro3D.Cog3DVect3F)">
-            <summary>
-Add two Cog3DVect3F.
-</summary>
-            <param name="alpha">
-The first vector.
-</param>
-            <param name="beta">
-The second vector.
-</param>
-            <returns>
-The vector sum.
-</returns>
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DVect3F.ToString">
-            <inheritdoc cref="M:Cognex.VisionPro3D.ICog3DBase.ToString" />
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DVect3F.ComputeDistance(Cognex.VisionPro3D.Cog3DVect3F)">
-            <summary>
-Compute the distance of this Cog3DVect3F from the supplied <paramref name="other" />.
-</summary>
-            <param name="other">
-The other vector.
-</param>
-            <returns>
-The computed distance.
-</returns>
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DVect3F.ComputeDotProduct(Cognex.VisionPro3D.Cog3DVect3F)">
-            <summary>
-Compute the dot product of this Cog3DVect3F with the supplied <paramref name="other" />.
-</summary>
-            <param name="other">
-The other vector.
-</param>
-            <returns>
-The computed dot product.
-</returns>
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DVect3F.ComputeCrossProduct(Cognex.VisionPro3D.Cog3DVect3F)">
-            <summary>
-Compute the cross product of this Cog3DVect3F with the supplied <paramref name="other" />.
-</summary>
-            <param name="other">
-The other vector.
-</param>
-            <returns>
-The computed cross product vector.
-</returns>
-        </member>
-        <member name="P:Cognex.VisionPro3D.Cog3DVect3F.Length">
-            <summary>
-Gets the length of this vector.
-</summary>
-            <value>
-The length of this vector.
-</value>
-        </member>
-        <member name="P:Cognex.VisionPro3D.Cog3DVect3F.Z">
-            <summary>
-Gets the Z coordinate value.
-</summary>
-            <value>
-The Z coordinate value.
-</value>
-        </member>
-        <member name="P:Cognex.VisionPro3D.Cog3DVect3F.Y">
-            <summary>
-Gets the Y coordinate value.
-</summary>
-            <value>
-The Y coordinate value.
-</value>
-        </member>
-        <member name="P:Cognex.VisionPro3D.Cog3DVect3F.X">
-            <summary>
-Gets the X coordinate value.
-</summary>
-            <value>
-The X coordinate value.
-</value>
-        </member>
-        <member name="M:Cognex.VisionPro3D.Cog3DVect3F.#ctor(System.Single,System.Single,System.Single)">
-            <summary>
-Construct this Cog3DVect3F with the supplied X,Y,Z values.
-</summary>
-            <param name="initialX">
-The initial X value.
-</param>
-            <param name="initialY">
-The initial Y value.
-</param>
-            <param name="initialZ">
-The initial Z value.
-</param>
-        </member>
-        <member name="T:Cognex.VisionPro3D.Cog3DVect3F">
-            <summary>
-This value class encapsulates a three dimensional point or vector.
-Note that this class is immutable - it may not be changed once
-it has been constructed.
-<para>
-The default values for properties X, Y, and Z are 0.0.
-</para></summary>
         </member>
         <member name="M:Cognex.VisionPro3D.Cog3DVect3.RealEqual(Cognex.VisionPro3D.Cog3DVect3,Cognex.VisionPro3D.Cog3DVect3,System.Double)">
             <inheritdoc cref="M:Cognex.VisionPro3D.ICog3DBase.RealEqual(System.Object,System.Object,System.Double)" />
