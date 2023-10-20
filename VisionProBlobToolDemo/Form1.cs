@@ -19,7 +19,10 @@ namespace VisionProBlobToolDemo
     {
         private CogImage24PlanarColor cogImg24Color;
         private CogImage8Grey cogImg8Grey;
-            
+
+        string Path_P = @"C:\Users\LEGION5\Desktop\setParam.ini";
+        string Path_A = @"C:\Users\LEGION5\Desktop\Area.ini";
+
         public Form1()
         {
             InitializeComponent();
@@ -149,7 +152,7 @@ namespace VisionProBlobToolDemo
 
         private void setParamToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(textBox_Threshold.Text != null)
+            if (textBox_Threshold.Text != null)
             {
                 int value = int.Parse(textBox_Threshold.Text);
                 GlobalInstance.Instance.Tool.SetThreshold(value);
@@ -161,18 +164,27 @@ namespace VisionProBlobToolDemo
                 GlobalInstance.Instance.Tool.SetMinPixel(value);
             }
 
-            if(radioButton_DarkBlob.Checked)
+            if (radioButton_DarkBlob.Checked)
             {
                 int value = 0;
 
                 GlobalInstance.Instance.Tool.SetPolarity(value);
             }
-            else if(radioButton_WhiteBlob.Checked)
+            else if (radioButton_WhiteBlob.Checked)
             {
                 int value = 1;
 
                 GlobalInstance.Instance.Tool.SetPolarity(value);
             }
+
+            int polarityValue = radioButton_DarkBlob.Checked ? 0 : 1;
+            GlobalInstance.Instance.Tool.SetPolarity(polarityValue);
+
+            FileManager.SetValue(Path_P, "Parameter", "Polarity", polarityValue.ToString());
+            FileManager.SetValue(Path_P, "Parameter", "Threshold", textBox_Threshold.Text);
+            FileManager.SetValue(Path_P, "Parameter", "MinPixel", textBox_MinPixel.Text);
+
+            MessageBox.Show("Save Complete", "Save Parameter");
         }
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
@@ -181,6 +193,12 @@ namespace VisionProBlobToolDemo
             cogDisplay1.StaticGraphics.Clear();
 
             GlobalInstance.Instance.Tool.Run(cogImg8Grey, cogDisplay1);
+        }
+
+        private void bt_Save_Click(object sender, EventArgs e)
+        {
+            FileManager.SetValue(Path_A, "Area", "Min", textBox_Min.Text);
+            FileManager.SetValue(Path_A, "Area", "Max", textBox_Max.Text);
         }
     }
 }
