@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VisionProCaliperToolDemo
 {
-    internal class FileManager
+    public class FileManager
     {
         [DllImport("kernel32")]
         private static extern long GetPrivateProfileString(

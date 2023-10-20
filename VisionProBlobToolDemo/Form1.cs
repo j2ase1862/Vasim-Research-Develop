@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.IO;
 using Cognex.VisionPro;
 using Cognex.VisionPro.Blob;
 using Cognex.VisionPro.ImageFile;
 using Autofac;
+using VisionProCaliperToolDemo;
 
 namespace VisionProBlobToolDemo
 {
@@ -19,10 +20,22 @@ namespace VisionProBlobToolDemo
     {
         private CogImage24PlanarColor cogImg24Color;
         private CogImage8Grey cogImg8Grey;
-            
+
+        string path = @"C:\Users\Vasim\Desktop\Param_Bolb.ini";
+
+        StringBuilder sb_min = new StringBuilder(255);
+        StringBuilder sb_max = new StringBuilder(255);
+
+        StringBuilder sb_blob = new StringBuilder(255);
+        StringBuilder sb_threshold = new StringBuilder(255);
+        StringBuilder sb_minpixel = new StringBuilder(255);
+
+        public static Form1 form1;
+
         public Form1()
         {
             InitializeComponent();
+            form1 = this;
 
             #region 이 부분은 이해 필요
             // Autofac를 이용한 의존성 주입 설정
@@ -149,7 +162,7 @@ namespace VisionProBlobToolDemo
 
         private void setParamToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(textBox_Threshold.Text != null)
+            if (textBox_Threshold.Text != null)
             {
                 int value = int.Parse(textBox_Threshold.Text);
                 GlobalInstance.Instance.Tool.SetThreshold(value);
@@ -161,13 +174,13 @@ namespace VisionProBlobToolDemo
                 GlobalInstance.Instance.Tool.SetMinPixel(value);
             }
 
-            if(radioButton_DarkBlob.Checked)
+            if (radioButton_DarkBlob.Checked)
             {
                 int value = 0;
 
                 GlobalInstance.Instance.Tool.SetPolarity(value);
             }
-            else if(radioButton_WhiteBlob.Checked)
+            else if (radioButton_WhiteBlob.Checked)
             {
                 int value = 1;
 
@@ -181,6 +194,72 @@ namespace VisionProBlobToolDemo
             cogDisplay1.StaticGraphics.Clear();
 
             GlobalInstance.Instance.Tool.Run(cogImg8Grey, cogDisplay1);
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void bt_Pamramsave_Click(object sender, EventArgs e)
+        {
+            if (radioButton_DarkBlob.Checked == true)
+            {
+                FileManager.SetValue(path, "Parameter", "Blob", radioButton_DarkBlob.Text);
+                FileManager.SetValue(path, "Parameter", "Threshold", textBox_Threshold.Text);
+                FileManager.SetValue(path, "Parameter", "Min Pixel", textBox_MinPixel.Text);
+
+                MessageBox.Show("Save Complete", "Save Params");
+            }
+            if (radioButton_WhiteBlob.Checked == true)
+            {
+                FileManager.SetValue(path, "Parameter", "Blob", radioButton_WhiteBlob.Text);
+                FileManager.SetValue(path, "Parameter", "Threshold", textBox_Threshold.Text);
+                FileManager.SetValue(path, "Parameter", "Min Pixel", textBox_MinPixel.Text);
+
+                MessageBox.Show("Save Complete", "Save Params");
+            }
+        }
+
+        private void bt_Scopesave_Click(object sender, EventArgs e)
+        {
+            FileManager.SetValue(path, "Scope", "Min", textBox_MinSet.Text);
+            FileManager.SetValue(path, "Scope", "Max", textBox_MaxSet.Text);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // 프로그램 로드될 때 파일 유무 확인하여 display
+            FileManager.GetValue(path, "Scope", "Min", "", sb_min);
+            string get_min = sb_min.ToString();
+
+            if (File.Exists(path) == true && get_min.Equals("") == false)
+            {
+                textBox_MinSet.Text = get_min;
+
+                FileManager.GetValue(path, "Scope", "Max", "", sb_max);
+                textBox_MaxSet.Text = sb_max.ToString();
+
+                FileManager.GetValue(path, "Parameter", "Blob", "", sb_blob);
+                FileManager.GetValue(path, "Parameter", "Threshold", "", sb_threshold);
+                FileManager.GetValue(path, "Parameter", "Min Pixel", "", sb_minpixel);
+
+                if (sb_blob.ToString().Equals(radioButton_WhiteBlob.Text) == true)
+                {
+                    radioButton_WhiteBlob.Checked = true;
+                }
+                else if (sb_blob.ToString().Equals(radioButton_DarkBlob.Text) == true)
+                {
+                    radioButton_DarkBlob.Checked = true;
+                }
+                textBox_Threshold.Text = sb_threshold.ToString();
+                textBox_MinPixel.Text = sb_minpixel.ToString();
+            }
+            else
+            {
+                textBox_MinSet.Text = "100000";
+                textBox_MaxSet.Text = "500000";
+            }
         }
     }
 }

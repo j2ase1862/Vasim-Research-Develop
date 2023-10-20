@@ -117,5 +117,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VisionProCaliperToolDemo\VisionProCaliperToolDemo.csproj">
+      <Project>{01c15679-3be6-4d50-a508-3bdd62e9408f}</Project>
+      <Name>VisionProCaliperToolDemo</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

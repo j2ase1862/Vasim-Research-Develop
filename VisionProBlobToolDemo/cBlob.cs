@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Forms;
 using Cognex.VisionPro;
 using Cognex.VisionPro.Blob;
 using Cognex.VisionPro.Display;
@@ -116,11 +116,24 @@ namespace VisionProBlobToolDemo
 
                         double blobFindCount = _tool.Results.GetBlobs().Count; // blob find 결과값에서 찾은 blob의 count를 추출한다.
 
+                        string resultArea;
+
+                        if (sumArea > int.Parse(Form1.form1.textBox_MinSet.Text) && sumArea < int.Parse(Form1.form1.textBox_MaxSet.Text))
+                        {
+                            resultArea = "OK";
+                        } else
+                        {
+                            resultArea = "NG";
+                        }
+
                         string msg = "Blob Find Count : " + blobFindCount.ToString();
                         DrawResult(display, 100, 100, msg);
 
                         msg = "Blob Find Sum of Area : " + sumArea.ToString();
                         DrawResult(display, 100, 200, msg);
+
+                        msg = "Area Result : " + resultArea;
+                        DrawResult(display, 100, 300, msg);
                     }
                 }
             }
