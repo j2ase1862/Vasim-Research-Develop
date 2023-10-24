@@ -17,8 +17,15 @@ namespace VisionProBlobToolDemo
         void SetThreshold(int value);
         void SetMinPixel(int value);
         void ShowRegion(CogDisplay display);
-        void Run(CogImage8Grey img, CogDisplay display);
+        void Run(CogImage8Grey img, CogDisplay display, int index);
         void DrawResult(CogDisplay display, double textXCoordinate, double textYCoordinate, string msg);
+        void SaveRegion();
+        void GetRegion(Boolean file_exists, int index);
+        void GetIndex(int index);
+        void DisplayParam();
+        void GetParam(Boolean file_exists, int index);
+        void SetParam();
+        void SetScope();
     }
     #endregion
     public static class BlobToolFactory

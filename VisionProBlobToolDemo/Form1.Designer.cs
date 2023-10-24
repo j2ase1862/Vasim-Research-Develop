@@ -57,6 +57,10 @@
             this.textBox_MinSet = new System.Windows.Forms.TextBox();
             this.textBox_MaxSet = new System.Windows.Forms.TextBox();
             this.bt_Scopesave = new System.Windows.Forms.Button();
+            this.bt_SaveRegion = new System.Windows.Forms.Button();
+            this.comboBox_Blob = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button_Inspection = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cogDisplay1)).BeginInit();
             this.SuspendLayout();
@@ -149,28 +153,28 @@
             // initToolStripMenuItem
             // 
             this.initToolStripMenuItem.Name = "initToolStripMenuItem";
-            this.initToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.initToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.initToolStripMenuItem.Text = "Init";
             this.initToolStripMenuItem.Click += new System.EventHandler(this.initToolStripMenuItem_Click);
             // 
             // setParamToolStripMenuItem
             // 
             this.setParamToolStripMenuItem.Name = "setParamToolStripMenuItem";
-            this.setParamToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.setParamToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.setParamToolStripMenuItem.Text = "Set Param";
             this.setParamToolStripMenuItem.Click += new System.EventHandler(this.setParamToolStripMenuItem_Click);
             // 
             // showRegionToolStripMenuItem
             // 
             this.showRegionToolStripMenuItem.Name = "showRegionToolStripMenuItem";
-            this.showRegionToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.showRegionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.showRegionToolStripMenuItem.Text = "Show Region";
             this.showRegionToolStripMenuItem.Click += new System.EventHandler(this.showRegionToolStripMenuItem_Click);
             // 
             // runToolStripMenuItem
             // 
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.runToolStripMenuItem.Text = "Run";
             this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
@@ -258,7 +262,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(369, 719);
+            this.label1.Location = new System.Drawing.Point(365, 719);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 12);
             this.label1.TabIndex = 28;
@@ -267,7 +271,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(369, 751);
+            this.label2.Location = new System.Drawing.Point(365, 751);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 12);
             this.label2.TabIndex = 29;
@@ -275,21 +279,21 @@
             // 
             // textBox_MinSet
             // 
-            this.textBox_MinSet.Location = new System.Drawing.Point(401, 715);
+            this.textBox_MinSet.Location = new System.Drawing.Point(397, 715);
             this.textBox_MinSet.Name = "textBox_MinSet";
             this.textBox_MinSet.Size = new System.Drawing.Size(78, 21);
             this.textBox_MinSet.TabIndex = 30;
             // 
             // textBox_MaxSet
             // 
-            this.textBox_MaxSet.Location = new System.Drawing.Point(401, 747);
+            this.textBox_MaxSet.Location = new System.Drawing.Point(397, 747);
             this.textBox_MaxSet.Name = "textBox_MaxSet";
             this.textBox_MaxSet.Size = new System.Drawing.Size(78, 21);
             this.textBox_MaxSet.TabIndex = 31;
             // 
             // bt_Scopesave
             // 
-            this.bt_Scopesave.Location = new System.Drawing.Point(516, 715);
+            this.bt_Scopesave.Location = new System.Drawing.Point(506, 715);
             this.bt_Scopesave.Name = "bt_Scopesave";
             this.bt_Scopesave.Size = new System.Drawing.Size(144, 53);
             this.bt_Scopesave.TabIndex = 32;
@@ -297,11 +301,56 @@
             this.bt_Scopesave.UseVisualStyleBackColor = true;
             this.bt_Scopesave.Click += new System.EventHandler(this.bt_Scopesave_Click);
             // 
+            // bt_SaveRegion
+            // 
+            this.bt_SaveRegion.Location = new System.Drawing.Point(677, 715);
+            this.bt_SaveRegion.Name = "bt_SaveRegion";
+            this.bt_SaveRegion.Size = new System.Drawing.Size(144, 53);
+            this.bt_SaveRegion.TabIndex = 33;
+            this.bt_SaveRegion.Text = "Region Info Save";
+            this.bt_SaveRegion.UseVisualStyleBackColor = true;
+            this.bt_SaveRegion.Click += new System.EventHandler(this.bt_SaveRegion_Click);
+            // 
+            // comboBox_Blob
+            // 
+            this.comboBox_Blob.FormattingEnabled = true;
+            this.comboBox_Blob.Items.AddRange(new object[] {
+            "Blob0",
+            "Blob1"});
+            this.comboBox_Blob.Location = new System.Drawing.Point(1021, 667);
+            this.comboBox_Blob.Name = "comboBox_Blob";
+            this.comboBox_Blob.Size = new System.Drawing.Size(78, 20);
+            this.comboBox_Blob.TabIndex = 34;
+            this.comboBox_Blob.SelectedIndexChanged += new System.EventHandler(this.comboBox_Blob_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(985, 670);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(30, 12);
+            this.label3.TabIndex = 35;
+            this.label3.Text = "Blob";
+            // 
+            // button_Inspection
+            // 
+            this.button_Inspection.Location = new System.Drawing.Point(955, 715);
+            this.button_Inspection.Name = "button_Inspection";
+            this.button_Inspection.Size = new System.Drawing.Size(144, 53);
+            this.button_Inspection.TabIndex = 36;
+            this.button_Inspection.Text = "Inspection";
+            this.button_Inspection.UseVisualStyleBackColor = true;
+            this.button_Inspection.Click += new System.EventHandler(this.button_Inspection_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1121, 816);
+            this.Controls.Add(this.button_Inspection);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.comboBox_Blob);
+            this.Controls.Add(this.bt_SaveRegion);
             this.Controls.Add(this.bt_Scopesave);
             this.Controls.Add(this.textBox_MaxSet);
             this.Controls.Add(this.textBox_MinSet);
@@ -344,10 +393,6 @@
         private System.Windows.Forms.ToolStripMenuItem showRegionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
         private Cognex.VisionPro.Display.CogDisplay cogDisplay1;
-        private System.Windows.Forms.RadioButton radioButton_WhiteBlob;
-        private System.Windows.Forms.RadioButton radioButton_DarkBlob;
-        private System.Windows.Forms.TextBox textBox_MinPixel;
-        private System.Windows.Forms.TextBox textBox_Threshold;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button bt_Pamramsave;
@@ -356,6 +401,14 @@
         public System.Windows.Forms.TextBox textBox_MinSet;
         public System.Windows.Forms.TextBox textBox_MaxSet;
         private System.Windows.Forms.Button bt_Scopesave;
+        private System.Windows.Forms.Button bt_SaveRegion;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button_Inspection;
+        public System.Windows.Forms.ComboBox comboBox_Blob;
+        public System.Windows.Forms.RadioButton radioButton_WhiteBlob;
+        public System.Windows.Forms.RadioButton radioButton_DarkBlob;
+        public System.Windows.Forms.TextBox textBox_MinPixel;
+        public System.Windows.Forms.TextBox textBox_Threshold;
     }
 }
 

@@ -60,9 +60,13 @@ D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\System.Memor
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\System.Numerics.Vectors.dll
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\VisionProCaliperToolDemo.exe
+D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\Cognex.VisionPro.Caliper.dll
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\Cognex.VisionPro.CorePlus.dll
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\stdole.dll
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\Cognex.VisionPro3D.Core.dll
+D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\VisionProCaliperToolDemo.pdb
+D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\VisionProCaliperToolDemo.exe.config
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\Autofac.xml
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\Cognex.VisionPro.xml
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\Cognex.VisionPro.Blob.xml
@@ -77,6 +81,7 @@ D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\System.Memor
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\System.Numerics.Vectors.xml
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\Cognex.VisionPro.Caliper.xml
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\Cognex.VisionPro.CorePlus.xml
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\Cognex.VisionPro3D.Core.xml
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\obj\Debug\VisionProBlobToolDemo.csproj.AssemblyReference.cache
@@ -87,8 +92,3 @@ D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\obj\Debug\VisionProBlo
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\obj\Debug\VisionProBlobToolDemo.csproj.CopyComplete
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\obj\Debug\VisionProBlobToolDemo.exe
 D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\obj\Debug\VisionProBlobToolDemo.pdb
-D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\VisionProCaliperToolDemo.exe
-D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\Cognex.VisionPro.Caliper.dll
-D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\VisionProCaliperToolDemo.pdb
-D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\VisionProCaliperToolDemo.exe.config
-D:\repo\Bold\Vasim-Research-Develop\VisionProBlobToolDemo\bin\Debug\Cognex.VisionPro.Caliper.xml

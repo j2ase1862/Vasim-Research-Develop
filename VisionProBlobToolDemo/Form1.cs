@@ -21,7 +21,8 @@ namespace VisionProBlobToolDemo
         private CogImage24PlanarColor cogImg24Color;
         private CogImage8Grey cogImg8Grey;
 
-        string path = @"C:\Users\Vasim\Desktop\Param_Bolb.ini";
+        string path = @"C:\Users\Vasim\Desktop\Bolb_Param.ini";
+        string region_path = @"C:\Users\Vasim\Desktop\Bolb_Region.ini";
 
         StringBuilder sb_min = new StringBuilder(255);
         StringBuilder sb_max = new StringBuilder(255);
@@ -29,6 +30,12 @@ namespace VisionProBlobToolDemo
         StringBuilder sb_blob = new StringBuilder(255);
         StringBuilder sb_threshold = new StringBuilder(255);
         StringBuilder sb_minpixel = new StringBuilder(255);
+
+        StringBuilder sb_index = new StringBuilder(10);
+        StringBuilder sb_X = new StringBuilder(255);
+        StringBuilder sb_Y = new StringBuilder(255);
+        StringBuilder sb_Width = new StringBuilder(255);
+        StringBuilder sb_Height = new StringBuilder(255);
 
         public static Form1 form1;
 
@@ -152,6 +159,9 @@ namespace VisionProBlobToolDemo
 
         private void initToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            cogDisplay1.StaticGraphics.Clear();
+            cogDisplay1.InteractiveGraphics.Clear();
+
             GlobalInstance.Instance.Tool.Init();
         }
 
@@ -162,6 +172,8 @@ namespace VisionProBlobToolDemo
 
         private void setParamToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            GlobalInstance.Instance.Tool.GetIndex(comboBox_Blob.SelectedIndex);
+
             if (textBox_Threshold.Text != null)
             {
                 int value = int.Parse(textBox_Threshold.Text);
@@ -193,7 +205,7 @@ namespace VisionProBlobToolDemo
             cogDisplay1.InteractiveGraphics.Clear();
             cogDisplay1.StaticGraphics.Clear();
 
-            GlobalInstance.Instance.Tool.Run(cogImg8Grey, cogDisplay1);
+            GlobalInstance.Instance.Tool.Run(cogImg8Grey, cogDisplay1, comboBox_Blob.SelectedIndex);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -203,62 +215,63 @@ namespace VisionProBlobToolDemo
 
         private void bt_Pamramsave_Click(object sender, EventArgs e)
         {
-            if (radioButton_DarkBlob.Checked == true)
-            {
-                FileManager.SetValue(path, "Parameter", "Blob", radioButton_DarkBlob.Text);
-                FileManager.SetValue(path, "Parameter", "Threshold", textBox_Threshold.Text);
-                FileManager.SetValue(path, "Parameter", "Min Pixel", textBox_MinPixel.Text);
-
-                MessageBox.Show("Save Complete", "Save Params");
-            }
-            if (radioButton_WhiteBlob.Checked == true)
-            {
-                FileManager.SetValue(path, "Parameter", "Blob", radioButton_WhiteBlob.Text);
-                FileManager.SetValue(path, "Parameter", "Threshold", textBox_Threshold.Text);
-                FileManager.SetValue(path, "Parameter", "Min Pixel", textBox_MinPixel.Text);
-
-                MessageBox.Show("Save Complete", "Save Params");
-            }
+            GlobalInstance.Instance.Tool.SetParam();
         }
 
         private void bt_Scopesave_Click(object sender, EventArgs e)
         {
-            FileManager.SetValue(path, "Scope", "Min", textBox_MinSet.Text);
-            FileManager.SetValue(path, "Scope", "Max", textBox_MaxSet.Text);
+            GlobalInstance.Instance.Tool.SetScope();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             // 프로그램 로드될 때 파일 유무 확인하여 display
-            FileManager.GetValue(path, "Scope", "Min", "", sb_min);
-            string get_min = sb_min.ToString();
-
-            if (File.Exists(path) == true && get_min.Equals("") == false)
+            for (int cb = 0; cb < comboBox_Blob.Items.Count; cb++)
             {
-                textBox_MinSet.Text = get_min;
+                // 파일로 저장된 Region 정보 호출
+                FileManager.GetValue(region_path, "Region" + cb, "Width", "", sb_Width);
+                string get_w = sb_Width.ToString();
 
-                FileManager.GetValue(path, "Scope", "Max", "", sb_max);
-                textBox_MaxSet.Text = sb_max.ToString();
-
-                FileManager.GetValue(path, "Parameter", "Blob", "", sb_blob);
-                FileManager.GetValue(path, "Parameter", "Threshold", "", sb_threshold);
-                FileManager.GetValue(path, "Parameter", "Min Pixel", "", sb_minpixel);
-
-                if (sb_blob.ToString().Equals(radioButton_WhiteBlob.Text) == true)
+                if (File.Exists(region_path) == true && get_w.Equals("") == false)
                 {
-                    radioButton_WhiteBlob.Checked = true;
+                    GlobalInstance.Instance.Tool.GetRegion(true, cb);
                 }
-                else if (sb_blob.ToString().Equals(radioButton_DarkBlob.Text) == true)
+                else
                 {
-                    radioButton_DarkBlob.Checked = true;
+                    GlobalInstance.Instance.Tool.GetRegion(false, cb);
                 }
-                textBox_Threshold.Text = sb_threshold.ToString();
-                textBox_MinPixel.Text = sb_minpixel.ToString();
+
+                // 파일로 저장된 Param 정보 호출
+                if (File.Exists(path) == true)
+                {
+                    GlobalInstance.Instance.Tool.GetParam(true, cb);
+                }
+                else
+                {
+                    GlobalInstance.Instance.Tool.GetParam(false, cb);
+                }
             }
-            else
+        }
+
+        private void bt_SaveRegion_Click(object sender, EventArgs e)
+        {
+            GlobalInstance.Instance.Tool.SaveRegion();
+        }
+
+        private void comboBox_Blob_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GlobalInstance.Instance.Tool.GetIndex(comboBox_Blob.SelectedIndex);
+            GlobalInstance.Instance.Tool.DisplayParam();
+        }
+
+        private void button_Inspection_Click(object sender, EventArgs e)
+        {
+            cogDisplay1.InteractiveGraphics.Clear();
+            cogDisplay1.StaticGraphics.Clear();
+
+            for (int si=0; si<comboBox_Blob.Items.Count; si++)
             {
-                textBox_MinSet.Text = "100000";
-                textBox_MaxSet.Text = "500000";
+                GlobalInstance.Instance.Tool.Run(cogImg8Grey, cogDisplay1, si);
             }
         }
     }
